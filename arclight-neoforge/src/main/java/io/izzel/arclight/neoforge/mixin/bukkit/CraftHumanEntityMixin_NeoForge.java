@@ -2,6 +2,7 @@ package io.izzel.arclight.neoforge.mixin.bukkit;
 
 import io.izzel.arclight.i18n.ArclightConfig;
 import io.izzel.arclight.neoforge.mod.permission.ArclightNeoForgePermissible;
+import io.izzel.arclight.neoforge.mod.permission.SilentPermissibleBase;
 import org.bukkit.craftbukkit.v.entity.CraftHumanEntity;
 import org.bukkit.permissions.PermissibleBase;
 import org.bukkit.permissions.ServerOperator;
@@ -14,6 +15,10 @@ public abstract class CraftHumanEntityMixin_NeoForge {
 
     @Redirect(method = "<init>", at = @At(value = "NEW", target = "(Lorg/bukkit/permissions/ServerOperator;)Lorg/bukkit/permissions/PermissibleBase;"))
     private PermissibleBase arclight$forge$forwardPerm(ServerOperator opable) {
+        CraftHumanEntity che = (CraftHumanEntity) (Object) this;
+        if (che.getHandle() instanceof net.neoforged.neoforge.common.util.FakePlayer) {
+            return new SilentPermissibleBase(opable);
+        }
         if (ArclightConfig.spec().getCompat().isForwardPermissionReverse()) {
             return new ArclightNeoForgePermissible(opable);
         } else {
