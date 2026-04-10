@@ -19,6 +19,7 @@
     "bukkit.CraftServerMixin_NeoForge",
     "bukkit.CraftWorldMixin_NeoForge",
     "bukkit.MaterialMixin_NeoForge",
+    "bukkit.PermissibleBaseMixin_NeoForge",
     "bukkit.StandardMessengerMixin_NeoForge",
     "compat.connector.CommandNodeMixin",
     "core.command.CommandsMixin_NeoForge",
